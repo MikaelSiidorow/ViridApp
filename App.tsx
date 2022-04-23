@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import Item from "./src/Pages/Item";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState<Boolean | null>(null);
   const [scanned, setScanned] = useState(false);
+  const [data, setData] = useState<string>("");
 
   useEffect(() => {
     (async () => {
@@ -21,7 +23,7 @@ export default function App() {
     data: string;
   }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    setData(data);
   };
 
   if (hasPermission === null) {
@@ -37,9 +39,7 @@ export default function App() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )}
+      {scanned && <Item data={data} setScanned={setScanned} />}
     </View>
   );
 }
