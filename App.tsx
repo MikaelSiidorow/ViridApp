@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Image } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Item from "./src/Pages/Item";
 
@@ -40,6 +40,10 @@ export default function App() {
         style={StyleSheet.absoluteFillObject}
       />
       {scanned && <Item data={data} setScanned={setScanned} />}
+      <Image
+        style={styles.logo}
+        source={{ uri: "https://i.imgur.com/blEIz5k.png" }}
+      />
     </View>
   );
 }
@@ -47,8 +51,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  logo: {
+    zIndex: 999,
+    position: "absolute",
+    width: 115,
+    height: 50,
+    bottom: 8,
   },
 });

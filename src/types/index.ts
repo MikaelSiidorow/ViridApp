@@ -1,4 +1,8 @@
 export interface Item {
   ean: string;
-  russian: boolean;
+  level: Level;
+  information: string[];
+  name: string;
 }
+
+type Level = "negative" | "neutral" | "positive";
